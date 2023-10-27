@@ -1,0 +1,12 @@
+from sympy import symbols, to_cnf, Not, Or, Implies
+
+# Definir variables proposicionales
+p, q, r = symbols('p q r')
+
+# Expresar la afirmación en lógica proposicional
+afirmacion = Implies(p, Or(Not(q), r))
+
+# Convertir a Forma Normal Conjuntiva (FNC)
+fnc = to_cnf(afirmacion)
+
+print(fnc)
