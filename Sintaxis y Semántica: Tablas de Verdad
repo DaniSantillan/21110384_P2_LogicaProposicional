@@ -1,0 +1,24 @@
+import itertools
+
+def tabla_verdad(proposiciones, expresion):
+    # Generar todas las combinaciones posibles de valores para las proposiciones
+    combinaciones = list(itertools.product([True, False], repeat=len(proposiciones)))
+
+    # Imprimir encabezados de la tabla
+    encabezados = proposiciones + [expresion]
+    print("\t".join(encabezados))
+
+    # Calcular el valor de la expresión para cada combinación de valores
+    for combo in combinaciones:
+        valores = dict(zip(proposiciones, combo))
+        resultado = eval(expresion, valores)
+        valores_str = [str(valores[prop]) for prop in proposiciones]
+        resultado_str = str(resultado)
+        print("\t".join(valores_str + [resultado_str]))
+
+# Definir las proposiciones y la expresión lógica
+proposiciones = ['p', 'q']
+expresion = '(p and q) or (not p and not q)'
+
+# Generar y mostrar la tabla de verdad
+tabla_verdad(proposiciones, expresion)
