@@ -1,0 +1,33 @@
+def backtrack(assignment, formula):
+    if not formula:
+        return assignment
+    
+    # Elige una variable no asignada
+    var = [v for v in formula[0] if v not in assignment and not f"¬{v}" in assignment]
+    
+    # Intenta asignar verdadero y falso a la variable
+    for value in [True, False]:
+        new_assignment = assignment.copy()
+        new_assignment.append(var[0] if value else f"¬{var[0]}")
+        
+        # Filtra las cláusulas que aún son satisfiables
+        remaining_formula = [clause for clause in formula if var[0] not in clause or (var[0] in clause and value)]
+        
+        # Llama recursivamente con la nueva asignación y fórmula reducida
+        result = backtrack(new_assignment, remaining_formula)
+        
+        # Si encontramos una asignación válida, la retornamos
+        if result:
+            return result
+    
+    # Si no se encuentra ninguna asignación válida, retrocedemos
+    return None
+
+# Fórmula proposicional: (A or not B) and (not A or B) and (C or B)
+formula = [['A', '¬B'], ['¬A', 'B'], ['C', 'B']]
+
+# Llamada a la función de Backtracking
+result = backtrack([], formula)
+
+# Imprimir el resultado
+print("Asignación que satisface la fórmula:", result)
