@@ -1,0 +1,13 @@
+# Definición de proposiciones
+p = True
+q = False
+
+# Operadores lógicos
+and_result = p and q  # Conjunción (AND)
+or_result = p or q    # Disyunción (OR)
+not_result = not p    # Negación (NOT)
+
+# Impresión de resultados
+print("p AND q =", and_result)
+print("p OR q =", or_result)
+print("NOT p =", not_result)
