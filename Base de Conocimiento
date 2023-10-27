@@ -1,0 +1,18 @@
+# Base de Conocimiento
+base_conocimiento = {
+    'llueve': False,
+    'sol': True,
+    'dia_laboral': True,
+}
+
+# Reglas lógicas
+regla_1 = (base_conocimiento['llueve'] and base_conocimiento['dia_laboral']) or (not base_conocimiento['llueve'] and base_conocimiento['sol'])
+regla_2 = base_conocimiento['sol'] and base_conocimiento['dia_laboral']
+
+# Aplicar reglas
+if regla_1:
+    print("Hoy necesitas un paraguas.")
+elif regla_2:
+    print("Hoy hace sol, ¡disfruta tu día!")
+else:
+    print("Hoy no llueve y no es día laboral.")
