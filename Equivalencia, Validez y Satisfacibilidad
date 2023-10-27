@@ -1,0 +1,17 @@
+# Definimos las variables proposicionales
+p = True
+q = False
+
+# Equivalencia: p ↔ q
+equivalencia = p == q
+
+# Validez: (p → q) ∧ (q → p)
+validez = (not p or q) and (not q or p)
+
+# Satisfacibilidad: p ∧ q
+satisfacibilidad = p and q
+
+# Mostramos los resultados
+print("Equivalencia (p ↔ q):", equivalencia)
+print("Validez ((p → q) ∧ (q → p)):", validez)
+print("Satisfacibilidad (p ∧ q):", satisfacibilidad)
