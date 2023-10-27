@@ -1,0 +1,34 @@
+from ortools.sat.python import cp_model
+
+def asignar_tareas():
+    # Crear el modelo
+    modelo = cp_model.CpModel()
+
+    # Definir las variables
+    num_personas = 3
+    num_tareas = 3
+
+    asignacion = [[modelo.NewBoolVar(f'Persona_{i}_Tarea_{j}') for j in range(num_tareas)] for i in range(num_personas)]
+
+    # Cada persona debe realizar exactamente una tarea
+    for i in range(num_personas):
+        modelo.Add(sum(asignacion[i]) == 1)
+
+    # Cada tarea debe ser realizada por exactamente una persona
+    for j in range(num_tareas):
+        modelo.Add(sum(asignacion[i][j] for i in range(num_personas)) == 1)
+
+    # Definir la función objetivo (por ejemplo, maximizar la satisfacción total)
+
+    # Crear el solver y resolver el problema
+    solver = cp_model.CpSolver()
+    status = solver.Solve(modelo)
+
+    # Imprimir la solución
+    if status == cp_model.OPTIMAL:
+        for i in range(num_personas):
+            for j in range(num_tareas):
+                if solver.Value(asignacion[i][j]) == 1:
+                    print(f'Persona {i + 1} realiza Tarea {j + 1}')
+
+asignar_tareas()
