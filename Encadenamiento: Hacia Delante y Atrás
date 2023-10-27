@@ -1,0 +1,43 @@
+# Reglas
+reglas = [
+    ("pajaro", "puede_volar"),
+]
+
+# Hechos iniciales
+hechos = {
+    "Tweety": "pajaro",
+}
+
+def encadenamiento_hacia_adelante(reglas, hechos):
+    while True:
+        nueva_informacion = False
+        for antecedente, consecuente in reglas:
+            if antecedente in hechos and hechos[antecedente] == consecuente:
+                continue  # La regla ya se ha aplicado
+            if antecedente in hechos:
+                hechos[antecedente] = consecuente
+                nueva_informacion = True
+                print(f"Se aplicó la regla: {antecedente} -> {consecuente}")
+                break
+        if not nueva_informacion:
+            break
+
+encadenamiento_hacia_adelante(reglas, hechos)
+print("Hechos después del encadenamiento hacia adelante:", hechos)
+
+
+def encadenamiento_hacia_atras(reglas, hechos, objetivo):
+    if objetivo in hechos:
+        return True  # El objetivo ya está demostrado
+
+    for antecedente, consecuente in reglas:
+        if consecuente == objetivo:
+            if encadenamiento_hacia_atras(reglas, hechos, antecedente):
+                print(f"Se puede demostrar que {objetivo} es verdadero.")
+                return True
+
+    return False
+
+objetivo = "puede_volar"
+resultado = encadenamiento_hacia_atras(reglas, hechos, objetivo)
+print(f"¿Tweety puede volar? {'Sí' if resultado else 'No'}")
